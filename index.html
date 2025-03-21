@@ -6,7 +6,23 @@
     <title>Nuestro Reencuentro</title>
 </head>
 <body>
-    <h1>Bienvenido</h1>
+    <h1>Nuestro Reencuentro</h1>
     <p>Esta es nuestra historia.</p>
+    <div id="conversaciones"></div>
+
+    <script>
+        fetch('conversaciones.json')
+            .then(response => response.json())
+            .then(data => {
+                let contenedor = document.getElementById('conversaciones');
+                data.conversaciones.forEach(conv => {
+                    let p = document.createElement('p');
+                    p.textContent = `${conv.fecha}: ${conv.mensaje}`;
+                    contenedor.appendChild(p);
+                });
+            })
+            .catch(error => console.error('Error cargando las conversaciones:', error));
+    </script>
 </body>
+
 </html>
